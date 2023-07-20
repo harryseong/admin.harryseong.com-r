@@ -8,7 +8,6 @@ import Login from './pages/login/Login';
 function App() {
   return (
     <div className="App">
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AppLayout />}>
@@ -17,7 +16,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-
     </div>
   );
 }
