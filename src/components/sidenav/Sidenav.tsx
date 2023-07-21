@@ -2,6 +2,7 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faBucket, faCamera, faCircleInfo, faCloudSunRain, faEarthAmericas, faHeadphones, faKitchenSet, faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 
 export interface SidenavListItem {
@@ -25,7 +26,7 @@ export const SidenavListItemButton = (props: SidenavListItem) => {
     const { faIconDefinition, href, label } = props;
 
     return (
-        <ListItemButton href={href}>
+        <ListItemButton component={NavLink} to={href}>
             <ListItemIcon>
                 <FontAwesomeIcon icon={faIconDefinition} />
             </ListItemIcon>
