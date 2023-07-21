@@ -6,25 +6,26 @@ import { List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from 
 
 export interface SidenavListItem {
     label: string;
+    href: string;
     faIconDefinition: IconDefinition;
 }
 
 const sidenavListItems: SidenavListItem[] = [
-    { label: 'Places', faIconDefinition: faEarthAmericas },
-    { label: 'Photos', faIconDefinition: faCamera },
-    { label: 'Music', faIconDefinition: faHeadphones },
-    { label: 'Weather', faIconDefinition: faCloudSunRain },
-    { label: 'Bucket List', faIconDefinition: faBucket },
-    { label: 'Recipes', faIconDefinition: faKitchenSet },
-    { label: 'Quotes', faIconDefinition: faQuoteRight },
-    { label: 'About', faIconDefinition: faCircleInfo },
+    { label: 'Places', href: '/places', faIconDefinition: faEarthAmericas },
+    { label: 'Photos', href: '/', faIconDefinition: faCamera },
+    { label: 'Music', href: '/', faIconDefinition: faHeadphones },
+    { label: 'Weather', href: '/', faIconDefinition: faCloudSunRain },
+    { label: 'Bucket List', href: '/', faIconDefinition: faBucket },
+    { label: 'Recipes', href: '/', faIconDefinition: faKitchenSet },
+    { label: 'Quotes', href: '/', faIconDefinition: faQuoteRight },
+    { label: 'About', href: '/', faIconDefinition: faCircleInfo },
 ]
 
 export const SidenavListItemButton = (props: SidenavListItem) => {
-    const { faIconDefinition, label } = props;
+    const { faIconDefinition, href, label } = props;
 
     return (
-        <ListItemButton>
+        <ListItemButton href={href}>
             <ListItemIcon>
                 <FontAwesomeIcon icon={faIconDefinition} />
             </ListItemIcon>

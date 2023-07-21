@@ -5,6 +5,7 @@ import { AppLayout } from './layouts/AppLayout';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Places } from './pages/places/Places';
 
 export const darkTheme = createTheme({
   palette: {
@@ -20,12 +21,13 @@ export const lightTheme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={lightTheme}>
       <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<AppLayout />}>
               <Route index element={<Home />}></Route>
+              <Route path="/places" element={<Places />}></Route>
               <Route path="/login" element={<Login />}></Route>
             </Route>
           </Routes>
