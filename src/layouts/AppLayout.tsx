@@ -10,12 +10,12 @@ export function AppLayout() {
             <Navbar />
 
             <Grid container spacing={2}>
-                <Grid xs={4} md={3} lg={3}>
+                <Grid sx={{ display: { xs: 'none', md: 'block' } }} md={3}>
 
                     <Sidenav />
 
                 </Grid>
-                <Grid xs={8} md={9} lg={9}>
+                <Grid sm={12} md={9}>
                     <Outlet />
                 </Grid>
 

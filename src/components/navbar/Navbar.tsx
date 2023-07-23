@@ -1,6 +1,9 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import './navbar.scss';
 import { red } from "@mui/material/colors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+
 
 function Navbar() {
 
@@ -8,6 +11,15 @@ function Navbar() {
         <>
             <AppBar position="sticky">
                 <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        // onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { md: 'none' } }}
+                    >
+                        <FontAwesomeIcon icon={solid("bars")} />
+                    </IconButton>
                     <Typography
                         color={red}
                         className="logo"
