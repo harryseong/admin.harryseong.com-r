@@ -4,20 +4,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppLayout } from './layouts/AppLayout';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { Places } from './pages/places/Places';
+import { lightTheme } from './themes';
 
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
 
 function App() {
   return (
