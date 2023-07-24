@@ -1,0 +1,1 @@
+`/features` has folders that contain all functionality related to a specific feature.
