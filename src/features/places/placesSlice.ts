@@ -33,7 +33,7 @@ export interface PlacesState {
         places: Place[],
         selectedPlace: Place | null
     }
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    status: 'idle' | 'loading' | 'success' | 'failure';
     error: string
 }
 
@@ -54,19 +54,17 @@ const initialState: PlacesState = {
     error: ''
 }
 
-// Define getPlaces thunk.
 export const fetchPlacesThunk = createAsyncThunk('places/fetchPlaces', () => {
     return PlacesAPI.getAll();
 });
 
-// Leverage the RTK createSlice function.
 export const placesSlice = createSlice({
     name: 'places',
     initialState,
     reducers: {
         setPlaces: (state, action: PayloadAction<Place[]>) => {
             state.value.places = action.payload;
-            state.status = 'succeeded';
+            state.status = 'success';
         },
         selectPlace: (state, action: PayloadAction<number>) => {
             const places = (state.value.places == null) ? null : state.value.places;
@@ -103,12 +101,12 @@ export const placesSlice = createSlice({
             state.value.selectedPlace = state.value.places[0];
             state.error = '';
             LocalStorage.setPlaces(places);
-            state.status = 'succeeded';
+            state.status = 'success';
         })
         builder.addCase(fetchPlacesThunk.rejected, (state, action) => {
             state.value.places = [];
             state.error = JSON.stringify(action.error.message);
-            state.status = 'failed';
+            state.status = 'failure';
         })
     }
 });
