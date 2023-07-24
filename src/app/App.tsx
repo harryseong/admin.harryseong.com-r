@@ -1,11 +1,11 @@
 import React from 'react';
-import './App.scss';
+import './app.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppLayout } from './layouts/AppLayout';
-import Home from './pages/home/Home';
-import Login from './pages/login/Login';
+import { AppLayout } from './AppLayout';
+import Home from '../features/home/Home';
+import Login from '../features/login/Login';
 import { ThemeProvider } from '@mui/material/styles';
-import { Places } from './pages/places/Places';
+import { Places } from '../features/places/Places';
 import { lightTheme } from './themes';
 
 

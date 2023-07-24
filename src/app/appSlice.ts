@@ -6,7 +6,7 @@ export interface AppState {
         darkMode: boolean,
         sidenavOpen: boolean
     };
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    status: 'idle' | 'loading' | 'success' | 'failure';
     error: string;
 }
 

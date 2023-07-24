@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Grid from '@mui/material/Unstable_Grid2';
-import Navbar from "../components/navbar/Navbar";
-import { Sidenav } from "../components/sidenav/Sidenav";
+import Navbar from "../common/components/navbar/Navbar";
+import { Sidenav } from "../common/components/sidenav/Sidenav";
 
 
 export function AppLayout() {

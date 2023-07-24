@@ -12,5 +12,3 @@ export const lightTheme = createTheme({
         mode: 'light',
     },
 });
-
-export default { darkTheme, lightTheme };
