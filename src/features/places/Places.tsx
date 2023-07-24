@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Place, fetchPlacesThunk, selectPlace, setPlaces } from "./placesSlice";
+import { Place, fetchPlacesThunk, setPlaces } from "./placesSlice";
 import { RootState } from "../../app/store";
 import { useEffect } from "react";
 import { CachedPlaces, LocalStorage } from "../../common/utils/localStorage";
