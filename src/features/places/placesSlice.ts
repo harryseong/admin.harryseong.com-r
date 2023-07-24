@@ -1,3 +1,6 @@
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PlacesAPI } from "../../common/api/placesAPI";
+import { LocalStorage } from "../../common/utils/localStorage";
 
 
 export interface Years {
@@ -34,3 +37,82 @@ export interface PlacesState {
     error: string
 }
 
+const seoulCoords: Coords = { lng: 126.97, lat: 37.56 };
+const initialState: PlacesState = {
+    value: {
+        mapbox: {
+            style: 'mapbox://styles/mapbox/dark-v9?optimize=true',
+            lng: seoulCoords.lng,
+            lat: seoulCoords.lat,
+            zoom: 10,
+            interactive: false
+        },
+        places: [],
+        selectedPlace: null
+    },
+    status: 'idle',
+    error: ''
+}
+
+// Define getPlaces thunk.
+export const fetchPlacesThunk = createAsyncThunk('places/fetchPlaces', () => {
+    return PlacesAPI.getAll();
+});
+
+// Leverage the RTK createSlice function.
+export const placesSlice = createSlice({
+    name: 'places',
+    initialState,
+    reducers: {
+        setPlaces: (state, action: PayloadAction<Place[]>) => {
+            state.value.places = action.payload;
+            state.status = 'succeeded';
+        },
+        selectPlace: (state, action: PayloadAction<number>) => {
+            const places = (state.value.places == null) ? null : state.value.places;
+            const selectedPlace = (places == null) ? null : places.find(place => place.place_id === action.payload);
+            state.value.selectedPlace = (selectedPlace == null) ? null : selectedPlace;
+        },
+        selectPreviousPlace: (state) => {
+            if (state.value.selectedPlace != null) {
+                const selectedPlaceIndex = state.value.selectedPlace?.order - 1;
+
+                if (selectedPlaceIndex > 0) {
+                    state.value.selectedPlace = state.value.places[selectedPlaceIndex - 1];
+                }
+            }
+        },
+        selectNextPlace: (state) => {
+            if (state.value.selectedPlace != null) {
+                const selectedPlaceIndex = state.value.selectedPlace?.order - 1;
+                const placesCount = state.value.places.length;
+
+                if (selectedPlaceIndex < placesCount - 1) {
+                    state.value.selectedPlace = state.value.places[selectedPlaceIndex + 1];
+                }
+            }
+        }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchPlacesThunk.pending, state => {
+            state.status = 'loading';
+        })
+        builder.addCase(fetchPlacesThunk.fulfilled, (state, action) => {
+            const places = action.payload.data.sort((a: Place, b: Place) => a.order - b.order);
+            state.value.places = places;
+            state.value.selectedPlace = state.value.places[0];
+            state.error = '';
+            LocalStorage.setPlaces(places);
+            state.status = 'succeeded';
+        })
+        builder.addCase(fetchPlacesThunk.rejected, (state, action) => {
+            state.value.places = [];
+            state.error = JSON.stringify(action.error.message);
+            state.status = 'failed';
+        })
+    }
+});
+
+export const { setPlaces, selectPlace, selectPreviousPlace, selectNextPlace } = placesSlice.actions;
+
+export default placesSlice.reducer;
