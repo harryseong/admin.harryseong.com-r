@@ -26,7 +26,7 @@ export const SidenavListItemButton = (props: SidenavListItem) => {
     const { faIconDefinition, href, label } = props;
 
     return (
-        <ListItemButton component={NavLink} to={href}>
+        <ListItemButton component={NavLink} to={href} key={label}>
             <ListItemIcon>
                 <FontAwesomeIcon icon={faIconDefinition} />
             </ListItemIcon>
